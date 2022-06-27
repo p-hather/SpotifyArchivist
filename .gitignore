@@ -1,0 +1,9 @@
+# Environment
+.env
+venv/
+
+# Spotipy cache
+.cache
+
+# Shelved data
+*.db
