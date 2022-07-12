@@ -1,6 +1,7 @@
 # Environment
-.env
 venv/
+secrets/.env
+secrets/*.json
 
 # Spotipy cache
 .cache
