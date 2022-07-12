@@ -1,6 +1,5 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from dotenv import load_dotenv
 import time
 from datetime import datetime
 import shelve
@@ -8,14 +7,13 @@ import shelve
 
 # TODO look into using token instead of auth each time
 
-class spotifyHistory:
-
+class spotifyExtract:
     def __init__(self):
-        load_dotenv()  # TODO move this into main.py so all files can access env
         self.client = self.spotify_auth()
         
     def spotify_auth(self):
         scopes = 'user-read-recently-played'
+        print(f'Attempting to authenticate Spotify access with scopes: {scopes}')
         return spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scopes, open_browser=False))
     
     def unix_ms_strf(self, unix_ms):
