@@ -21,6 +21,7 @@ class spotifyExtract:
         return ts.strftime('%Y-%m-%d %H:%M:%S')
     
     def get_history(self):
+        # Store a persistent timestamp to allow linear querying
         with shelve.open('spotify_history') as sh:
             try:
                 after = sh['after_ts']
