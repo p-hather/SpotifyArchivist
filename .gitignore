@@ -2,6 +2,7 @@
 venv/
 secrets/.env
 secrets/*.json
+dev/
 
 # Spotipy cache
 .cache
