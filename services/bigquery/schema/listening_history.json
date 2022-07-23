@@ -2,12 +2,12 @@
     {
         "name": "track",
         "type": "RECORD",
-        "mode": "REPEATED",
+        "mode": "NULLABLE",
         "fields": [
             {
                 "name": "album",
                 "type": "RECORD",
-                "mode": "REPEATED",
+                "mode": "NULLABLE",
                 "fields": [
                     {
                         "name": "album_type",
@@ -22,7 +22,7 @@
                             {
                                 "name": "external_urls",
                                 "type": "RECORD",
-                                "mode": "REPEATED",
+                                "mode": "NULLABLE",
                                 "fields": [
                                     {
                                         "name": "spotify",
@@ -66,7 +66,7 @@
                     {
                         "name": "external_urls",
                         "type": "RECORD",
-                        "mode": "REPEATED",
+                        "mode": "NULLABLE",
                         "fields": [
                             {
                                 "name": "spotify",
@@ -147,7 +147,7 @@
                     {
                         "name": "external_urls",
                         "type": "RECORD",
-                        "mode": "REPEATED",
+                        "mode": "NULLABLE",
                         "fields": [
                             {
                                 "name": "spotify",
@@ -206,7 +206,7 @@
             {
                 "name": "external_ids",
                 "type": "RECORD",
-                "mode": "REPEATED",
+                "mode": "NULLABLE",
                 "fields": [
                     {
                         "name": "isrc",
@@ -218,7 +218,7 @@
             {
                 "name": "external_urls",
                 "type": "RECORD",
-                "mode": "REPEATED",
+                "mode": "NULLABLE",
                 "fields": [
                     {
                         "name": "spotify",
@@ -282,12 +282,12 @@
     {
         "name": "context",
         "type": "RECORD",
-        "mode": "REPEATED",
+        "mode": "NULLABLE",
         "fields": [
             {
                 "name": "external_urls",
                 "type": "RECORD",
-                "mode": "REPEATED",
+                "mode": "NULLABLE",
                 "fields": [
                     {
                         "name": "spotify",

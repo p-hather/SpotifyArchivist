@@ -2,7 +2,7 @@ from google.cloud import bigquery, exceptions
 import re
 
 
-def get_bq_schema(data):
+def get_bq_schema(sample_data):
     '''
     Recursively iterate through sample data and return
     schema dict for configuring BigQuery table.
@@ -35,7 +35,7 @@ def get_bq_schema(data):
     }
 
     fields = []
-    for k, v in data.items():
+    for k, v in sample_data.items():
         bq_mode = bq_ref[type(v)]["mode"]
 
         # Lookup first value in list for type
@@ -64,10 +64,6 @@ def get_bq_schema(data):
         fields.append(schema_def)
     
     return fields
-    # Persist dict as json file
-    # with open('schema.json') as out_file:
-    #     json.dump(fields, out_file)
-
 
 class bigQueryLoad:
 
@@ -89,9 +85,10 @@ class bigQueryLoad:
         except exceptions.Conflict:
             print(f'Table `{self.table_id}` already exists')
 
-    def insert_rows(self):
+    def insert_rows(self, rows):
         print('Attempting to insert rows')
-        self.bq.insert_rows(self.table_obj, [
-            {"artist": "artist 1", "title": "test title 1"},
-            {"artist": "artist 2", "title": "test title 2"}
-        ])
+        errors = self.bq.insert_rows_json(self.table_obj, rows)
+        if errors:
+            print(errors)
+        else:
+            print('Success')
