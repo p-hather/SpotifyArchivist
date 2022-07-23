@@ -1,0 +1,316 @@
+[
+    {
+        "name": "track",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+            {
+                "name": "album",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "album_type",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "artists",
+                        "type": "RECORD",
+                        "mode": "REPEATED",
+                        "fields": [
+                            {
+                                "name": "external_urls",
+                                "type": "RECORD",
+                                "mode": "REPEATED",
+                                "fields": [
+                                    {
+                                        "name": "spotify",
+                                        "type": "STRING",
+                                        "mode": "NULLABLE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "href",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            },
+                            {
+                                "name": "id",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            },
+                            {
+                                "name": "name",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            },
+                            {
+                                "name": "type",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            },
+                            {
+                                "name": "uri",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "available_markets",
+                        "type": "STRING",
+                        "mode": "REPEATED"
+                    },
+                    {
+                        "name": "external_urls",
+                        "type": "RECORD",
+                        "mode": "REPEATED",
+                        "fields": [
+                            {
+                                "name": "spotify",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "href",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "id",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "images",
+                        "type": "RECORD",
+                        "mode": "REPEATED",
+                        "fields": [
+                            {
+                                "name": "height",
+                                "type": "INTEGER",
+                                "mode": "NULLABLE"
+                            },
+                            {
+                                "name": "url",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            },
+                            {
+                                "name": "width",
+                                "type": "INTEGER",
+                                "mode": "NULLABLE"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "name",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "release_date",
+                        "type": "DATE",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "release_date_precision",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "total_tracks",
+                        "type": "INTEGER",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "type",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "uri",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    }
+                ]
+            },
+            {
+                "name": "artists",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "external_urls",
+                        "type": "RECORD",
+                        "mode": "REPEATED",
+                        "fields": [
+                            {
+                                "name": "spotify",
+                                "type": "STRING",
+                                "mode": "NULLABLE"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "href",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "id",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "name",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "type",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    },
+                    {
+                        "name": "uri",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    }
+                ]
+            },
+            {
+                "name": "available_markets",
+                "type": "STRING",
+                "mode": "REPEATED"
+            },
+            {
+                "name": "disc_number",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "duration_ms",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "explicit",
+                "type": "BOOLEAN",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "external_ids",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "isrc",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    }
+                ]
+            },
+            {
+                "name": "external_urls",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "spotify",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    }
+                ]
+            },
+            {
+                "name": "href",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "id",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "is_local",
+                "type": "BOOLEAN",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "popularity",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "preview_url",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "track_number",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "type",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "uri",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            }
+        ]
+    },
+    {
+        "name": "played_at",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "context",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+            {
+                "name": "external_urls",
+                "type": "RECORD",
+                "mode": "REPEATED",
+                "fields": [
+                    {
+                        "name": "spotify",
+                        "type": "STRING",
+                        "mode": "NULLABLE"
+                    }
+                ]
+            },
+            {
+                "name": "href",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "type",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "uri",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            }
+        ]
+    }
+]
