@@ -15,7 +15,7 @@ def get_bq_schema(sample_data):
         },
         dict: {
             'type': 'RECORD',
-            'mode': 'REPEATED'
+            'mode': 'NULLABLE'
         },
         list: {
             "mode": 'REPEATED'
@@ -67,28 +67,30 @@ def get_bq_schema(sample_data):
 
 class bigQueryLoad:
 
-    def __init__(self, project, dataset, table, schema_fp):
+    def __init__(self, project, dataset, table):
         self.table_id = '.'.join([project, dataset, table])
         self.bq = self.get_client()
-        self.schema = self.bq.schema_from_json(schema_fp)
-        self.table_obj = bigquery.Table(self.table_id, schema=self.schema)
-        self.create_table()
     
     def get_client(self):
-        print('Authenticating BigQuery access with service account')
+        print('Attempting to authenticate BigQuery access with service account')
         return bigquery.Client()
 
-    def create_table(self):
+    def create_table(self, schema_fp):
+        schema = self.bq.schema_from_json(schema_fp)
+        table_obj = bigquery.Table(self.table_id, schema=schema)
         try:
-            self.bq.create_table(self.table_obj)
+            self.bq.create_table(table_obj)
             print(f'Created table `{self.table_id}`')
         except exceptions.Conflict:
             print(f'Table `{self.table_id}` already exists')
 
     def insert_rows(self, rows):
         print('Attempting to insert rows')
-        errors = self.bq.insert_rows_json(self.table_obj, rows)
-        if errors:
-            print(errors)
-        else:
-            print('Success')
+        try:
+            errors = self.bq.insert_rows_json(self.table_id, rows)
+            if errors:
+                print(f'Errors occurred:\n{errors}')
+            else:
+                print('Rows inserted successfully')
+        except exceptions.NotFound:
+            print(f'Table not found - verify {self.table_id} exists and use create_table function if applicable')
