@@ -5,8 +5,6 @@ from datetime import datetime
 import shelve
 
 
-# TODO look into using token instead of auth each time
-
 class spotifyExtract:
     def __init__(self):
         self.client = self.spotify_auth()
