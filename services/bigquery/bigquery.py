@@ -34,6 +34,9 @@ def get_bq_schema(sample_data):
         }
     }
 
+    date_regex = "\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"
+    timestamp_regex = f"{date_regex}T[0-2]\d(:[0-5][0-9]){2}.\d{1,6}Z"
+
     fields = []
     for k, v in sample_data.items():
         bq_mode = bq_ref[type(v)]["mode"]
@@ -45,10 +48,9 @@ def get_bq_schema(sample_data):
 
         # Check if string values are actually dates or timestamps
         if isinstance(v, str):
-            # TODO refine regex
-            if re.match("\d{4}(-\d{2}){2}$", v):
+            if re.match(f'^{date_regex}$', v):
                 bq_type = "DATE"
-            elif re.match("\d{4}(-\d{2}){2}T(\d{2}:){2}\d{2}.\d{3}Z$", v):
+            elif re.match(f'^{timestamp_regex}$', v):
                 bq_type = "TIMESTAMP"
 
         schema_def = {
@@ -64,6 +66,7 @@ def get_bq_schema(sample_data):
         fields.append(schema_def)
     
     return fields
+
 
 class bigQueryLoad:
 
