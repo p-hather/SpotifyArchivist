@@ -3,6 +3,7 @@ from services.bigquery import bigquery
 from dotenv import load_dotenv
 from os import path
 import json
+from time import sleep
 
 load_dotenv()
 
@@ -16,6 +17,7 @@ def generate_schema(fp, example_record):
             json.dump(schema, file, indent=4)
             print(f'Schema document created at {fp}')
 
+
 def extract_load_listening_history(sp_client, bq_client):
     listening_history = sp_client.get_history()
     if not listening_history:
@@ -24,6 +26,7 @@ def extract_load_listening_history(sp_client, bq_client):
     print(f'{len(listening_history)} tracks returned')
     bq_client.insert_rows(listening_history)
 
+
 def main():
     sp = spotifyExtract()
 
@@ -31,10 +34,14 @@ def main():
     dataset = 'spotify_archivist'
     table = 'listening_history'
     schema_fp = './services/bigquery/schema/listening_history.json'
+
     bq = bigquery.bigQueryLoad(project, dataset, table)
     bq.create_table(schema_fp)
-    extract_load_listening_history(sp, bq)
 
+    while True:
+        extract_load_listening_history(sp, bq)
+        sleep(60)  # Run every 3 minutes
+        
 
 if __name__ == '__main__':
     main()
