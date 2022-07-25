@@ -43,8 +43,4 @@ class spotifyExtract:
             now_ms = str(round(time.time() * 1000))
             sh['after_ts'] = now_ms
 
-        if not tracks:
-            print('No recent tracks found')
-            return
-        
         return tracks
