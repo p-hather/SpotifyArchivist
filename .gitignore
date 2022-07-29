@@ -1,7 +1,8 @@
 # Environment
 venv/
-secrets/.env
+secrets/*.env
 secrets/*.json
+!secrets/example*
 
 # Dev
 dev/
