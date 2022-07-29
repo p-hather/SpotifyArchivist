@@ -23,4 +23,4 @@ Set up Spotify Archivist by cloning this repo, ensuring you have all the prerequ
 * New responses will be streamed into your chosen BigQuery destination
 
 ### Other features
-The * `generate_schema` function in `main.py` references some custom code that will generate a BigQuery schema JSON document based on a sample record.
+* The `generate_schema` function in `main.py` references some custom code that will generate a BigQuery schema JSON document based on a sample record.
