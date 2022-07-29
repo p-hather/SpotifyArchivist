@@ -41,7 +41,7 @@ def main():
 
     while True:
         extract_load_listening_history(sp, bq)
-        sleep(60)  # Run every 3 minutes
+        sleep(180)  # Run every 3 minutes
         
 
 if __name__ == '__main__':
