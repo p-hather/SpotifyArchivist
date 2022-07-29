@@ -1,15 +1,16 @@
 from services.spotify import spotifyExtract
 from services.bigquery import bigquery
 from dotenv import load_dotenv
-from os import path
+import os
 import json
 from time import sleep
 
-load_dotenv()
+env_path = './secrets/.env'
+load_dotenv(env_path)
 
 
 def generate_schema(fp, example_record):
-    if path.exists(fp):
+    if os.path.exists(fp):
         print(f'Schema document already exists at {fp}')
     else:
         schema = bigquery.get_bq_schema(example_record)
@@ -30,7 +31,7 @@ def extract_load_listening_history(sp_client, bq_client):
 def main():
     sp = spotifyExtract()
 
-    project = 'sector-7g-296122'
+    project = os.getenv('BIGQUERY_PROJECT')
     dataset = 'spotify_archivist'
     table = 'listening_history'
     schema_fp = './services/bigquery/schema/listening_history.json'
