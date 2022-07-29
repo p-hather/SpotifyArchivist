@@ -3,6 +3,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import time
 from datetime import datetime
 import shelve
+import logging
 
 
 class spotifyExtract:
@@ -11,7 +12,7 @@ class spotifyExtract:
         
     def spotify_auth(self):
         scopes = 'user-read-recently-played'
-        print(f'Attempting to authenticate Spotify access with scopes: {scopes}')
+        logging.info(f'Attempting to authenticate Spotify access with scopes: {scopes}')
         return spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scopes, open_browser=False))
     
     def unix_ms_strf(self, unix_ms):
@@ -27,9 +28,9 @@ class spotifyExtract:
                 after = None
             
             if not after:
-                print('Getting recently played tracks with no time constraints')
+                logging.info('Getting recently played tracks with no time constraints')
             else:
-                print(f'Getting recently played tracks after {self.unix_ms_strf(after)}')
+                logging.info(f'Getting recently played tracks after {self.unix_ms_strf(after)}')
             
             recently_played = self.client.current_user_recently_played(after=after)
             tracks = recently_played['items']

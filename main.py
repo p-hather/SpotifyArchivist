@@ -4,27 +4,31 @@ from dotenv import load_dotenv
 import os
 import json
 from time import sleep
+import logging
 
 env_path = './secrets/.env'
 load_dotenv(env_path)
 
+logging.basicConfig(level=logging.INFO, filename="sbqt.log", filemode="a+",
+                    format="%(asctime)-15s %(levelname)-8s %(message)s")
+
 
 def generate_schema(fp, example_record):
     if os.path.exists(fp):
-        print(f'Schema document already exists at {fp}')
+        logging.info(f'Schema document already exists at {fp}')
     else:
         schema = bigquery.get_bq_schema(example_record)
         with open(fp, 'w') as file:
             json.dump(schema, file, indent=4)
-            print(f'Schema document created at {fp}')
+            logging.info(f'Schema document created at {fp}')
 
 
 def extract_load_listening_history(sp_client, bq_client):
     listening_history = sp_client.get_history()
     if not listening_history:
-        print('No listening history found - exiting function')
+        logging.info('No listening history found - exiting function')
         return
-    print(f'{len(listening_history)} tracks returned')
+    logging.info(f'{len(listening_history)} tracks returned')
     bq_client.insert_rows(listening_history)
 
 

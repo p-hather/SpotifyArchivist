@@ -7,10 +7,11 @@ secrets/*.json
 # Dev
 dev/
 
-# Caches
+# Caches/logs
 .cache
 .pyc
 __pycache__/
+*.log
 
 # Shelved data
 *.db

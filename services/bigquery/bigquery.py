@@ -1,5 +1,6 @@
 from google.cloud import bigquery, exceptions
 import re
+import logging
 
 
 def get_bq_schema(sample_data):
@@ -75,7 +76,7 @@ class bigQueryLoad:
         self.bq = self.get_client()
     
     def get_client(self):
-        print('Attempting to authenticate BigQuery access with service account')
+        logging.info('Attempting to authenticate BigQuery access with service account')
         return bigquery.Client()
 
     def create_table(self, schema_fp):
@@ -83,17 +84,17 @@ class bigQueryLoad:
         table_obj = bigquery.Table(self.table_id, schema=schema)
         try:
             self.bq.create_table(table_obj)
-            print(f'Created table `{self.table_id}`')
+            logging.info(f'Created table `{self.table_id}`')
         except exceptions.Conflict:
-            print(f'Table `{self.table_id}` already exists')
+            logging.info(f'Table `{self.table_id}` already exists')
 
     def insert_rows(self, rows):
-        print('Attempting to insert rows')
+        logging.info('Attempting to insert rows')
         try:
             errors = self.bq.insert_rows_json(self.table_id, rows)
             if errors:
-                print(f'Errors occurred:\n{errors}')
+                logging.info(f'Errors occurred:\n{errors}')
             else:
-                print('Rows inserted successfully')
+                logging.info('Rows inserted successfully')
         except exceptions.NotFound:
-            print(f'Table not found - verify {self.table_id} exists and use create_table function if applicable')
+            logging.info(f'Table not found - verify {self.table_id} exists and use create_table function if applicable')
