@@ -15,3 +15,6 @@ __pycache__/
 
 # Shelved data
 *.db
+
+# System
+.DS_Store
