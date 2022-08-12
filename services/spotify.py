@@ -39,6 +39,7 @@ class spotifyExtract:
             try:
                 recently_played = self.client.current_user_recently_played(after=after)
             except ReadTimeout:
+                logging.info('Spotify connection lost - attempting to reconnect')
                 self.client = self.spotify_auth()
                 recently_played = self.client.current_user_recently_played(after=after)
 
