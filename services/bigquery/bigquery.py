@@ -71,9 +71,12 @@ def get_bq_schema(sample_data):
 
 class bigQueryLoad:
 
-    def __init__(self, project, dataset, table, basic_view=None):
-        self.table_id = '.'.join([project, dataset, table])
-        self.basic_view = basic_view
+    def __init__(self, project, dataset, table, view=None):
+        self.project = project
+        self.dataset = dataset
+        self.table = table
+        self.table_id = '.'.join([self.project, self.dataset, self.table])
+        self.view = view
         self.bq = self.get_client()
     
     def get_client(self):
@@ -89,23 +92,23 @@ class bigQueryLoad:
         except exceptions.Conflict:
             logging.info(f'Table `{self.table_id}` already exists')
     
-    def create_basic_view(self, sql_fp):
-        if not self.basic_view:
+    def create_view(self, sql_fp):
+        if not self.view:
             logging.info(f'No basic view specified - skipping')
             return
         
-        basic_view_id = '.'.join([self.project, self.dataset, self.basic_view])
+        view_id = '.'.join([self.project, self.dataset, self.view])
         
         with open(sql_fp, 'r') as file:
             sql = file.read()
         
-        basic_view = bigquery.Table(basic_view_id)
-        basic_view.view_query = sql.format(source=self.table_id)
+        view = bigquery.Table(view_id)
+        view.view_query = sql.format(source=self.table_id)
         try:
-            self.bq.create_table(basic_view)
-            logging.info(f'Created view `{basic_view_id}`')
+            self.bq.create_table(view)
+            logging.info(f'Created view `{view_id}`')
         except exceptions.Conflict:
-            logging.info(f'View `{basic_view_id}` already exists')
+            logging.info(f'View `{view_id}` already exists')
 
     def insert_rows(self, rows):
         logging.info('Attempting to insert rows')
