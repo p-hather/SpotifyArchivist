@@ -41,9 +41,11 @@ def main():
     schema_fp = './services/bigquery/schema/listening_history.json'
 
     basic_view = 'listening_history_basic'
+    basic_view_fp = './services/bigquery/sql/listening_history_basic.sql'
 
     bq = bigquery.bigQueryLoad(project, dataset, table, basic_view)
     bq.create_table(schema_fp)
+    bq.create_view(basic_view_fp)
 
     while True:
         extract_load_listening_history(sp, bq)
