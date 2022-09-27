@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 import shelve
 import logging
-from requests.exceptions import ReadTimeout
+from requests.exceptions import ReadTimeout, ConnectionError
 
 
 class spotifyExtract:
@@ -38,7 +38,7 @@ class spotifyExtract:
             # Work around connection timeout issue by re-instantiating Spotify client
             try:
                 recently_played = self.client.current_user_recently_played(after=after)
-            except ReadTimeout:
+            except (ReadTimeout, ConnectionError):
                 logging.info('Spotify connection lost - attempting to reconnect')
                 self.client = self.spotify_auth()
                 recently_played = self.client.current_user_recently_played(after=after)
