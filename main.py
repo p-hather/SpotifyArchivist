@@ -40,7 +40,9 @@ def main():
     table = 'listening_history'
     schema_fp = './services/bigquery/schema/listening_history.json'
 
-    bq = bigquery.bigQueryLoad(project, dataset, table)
+    basic_view = 'listening_history_basic'
+
+    bq = bigquery.bigQueryLoad(project, dataset, table, basic_view)
     bq.create_table(schema_fp)
 
     while True:
