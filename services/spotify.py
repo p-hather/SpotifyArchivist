@@ -16,7 +16,7 @@ class spotifyExtract:
         logging.info(f'Attempting to authenticate Spotify access with scopes: {scopes}')
         return spotipy.Spotify(
             auth_manager=SpotifyOAuth(scope=scopes, open_browser=False),
-            requests_timeout=10, retries=10)
+            requests_timeout=10, retries=3)
     
     def unix_ms_strf(self, unix_ms):
         ts = datetime.utcfromtimestamp(int(unix_ms)/1000)
