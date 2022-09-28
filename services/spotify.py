@@ -5,6 +5,7 @@ from datetime import datetime
 import shelve
 import logging
 from requests.exceptions import ReadTimeout, ConnectionError
+import re
 
 
 class spotifyExtract:
@@ -44,6 +45,12 @@ class spotifyExtract:
                 recently_played = self.client.current_user_recently_played(after=after)
 
             tracks = recently_played['items']
+
+            # Some release dates are returned as a year string only. Identify and fix these
+            for track in tracks:
+                release_date = track['album']['release_date']
+                if re.match('\d{4}$', release_date):
+                    track['album']['release_date'] = f'{release_date}-01-01'  # Set to 1st January that year
 
             # This endpoint will only return the last 50 results, so the pagination below is not 
             # currently useful. Retained just in case this changes in future. 
